@@ -1,11 +1,34 @@
+"use client";
+
+import { useState } from "react";
 import { PowerCard } from "@/types";
 
 interface ResultScreenProps {
   card: PowerCard;
+  isSubmitting: boolean;
+  error: string | null;
+  hasSubmitted: boolean;
+  onSubmit: (name: string, email: string) => void;
   onReset: () => void;
 }
 
-export default function ResultScreen({ card, onReset }: ResultScreenProps) {
+export default function ResultScreen({
+  card,
+  isSubmitting,
+  error,
+  hasSubmitted,
+  onSubmit,
+  onReset,
+}: ResultScreenProps) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name.trim() || !email.trim()) return;
+    onSubmit(name.trim(), email.trim().toLowerCase());
+  }
+
   return (
     <div className="animate-fade-in-up flex w-full flex-col items-center gap-8 px-4 py-8 text-center">
       {/* Carte résultat */}
@@ -42,16 +65,6 @@ export default function ResultScreen({ card, onReset }: ResultScreenProps) {
         </div>
       </div>
 
-      {/* Confirmation */}
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-lg font-semibold text-ditch-yellow">
-          Participation enregistrée !
-        </p>
-        <p className="text-sm text-white/60">
-          Viens nous montrer ton résultat sur le stand Délires Games !
-        </p>
-      </div>
-
       {/* CTAs */}
       <div className="flex w-full max-w-sm flex-col gap-3">
         <a
@@ -79,6 +92,60 @@ export default function ResultScreen({ card, onReset }: ResultScreenProps) {
           📸 Suivre sur Instagram
         </a>
       </div>
+
+      {/* Formulaire tirage au sort */}
+      {hasSubmitted ? (
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-lg font-semibold text-ditch-yellow">
+            Participation enregistrée !
+          </p>
+          <p className="text-sm text-white/60">
+            Viens nous montrer ton résultat sur le stand Délires Games !
+          </p>
+        </div>
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full max-w-sm flex-col gap-4 rounded-2xl border-2 border-white/10 bg-white/5 p-6"
+        >
+          <p className="font-display text-lg font-bold text-ditch-yellow">
+            Tente de gagner le jeu !
+          </p>
+          <p className="text-sm text-white/60">
+            Laisse tes coordonnées pour participer au tirage au sort.
+          </p>
+
+          <input
+            type="text"
+            placeholder="Ton prénom"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="rounded-xl border-2 border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 outline-none transition-colors focus:border-ditch-teal"
+          />
+
+          <input
+            type="email"
+            placeholder="Ton email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="rounded-xl border-2 border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 outline-none transition-colors focus:border-ditch-teal"
+          />
+
+          {error && (
+            <p className="text-center text-sm text-red-400">{error}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={isSubmitting || !name.trim() || !email.trim()}
+            className="rounded-xl bg-ditch-yellow px-6 py-3 font-display text-lg font-bold text-ditch-dark transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-50"
+          >
+            {isSubmitting ? "Envoi en cours…" : "Je participe !"}
+          </button>
+        </form>
+      )}
 
       {/* Rejouer */}
       <button

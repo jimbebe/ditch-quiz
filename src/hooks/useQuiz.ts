@@ -1,14 +1,13 @@
 "use client";
 
 import { useReducer, useCallback } from "react";
-import { QuizState, QuizStep, PowerCard } from "@/types";
+import { QuizState } from "@/types";
 import { QUIZ_QUESTIONS } from "@/lib/quiz-data";
 import { addScores, getWinningCard } from "@/lib/quiz-logic";
 
 type QuizAction =
   | { type: "START_QUIZ" }
   | { type: "ANSWER"; answerIndex: number }
-  | { type: "GO_TO_EMAIL" }
   | { type: "SET_SUBMITTING"; value: boolean }
   | { type: "SET_ERROR"; error: string | null }
   | { type: "SUBMIT_SUCCESS" }
@@ -24,6 +23,7 @@ const initialState: QuizState = {
   playerName: "",
   playerEmail: "",
   isSubmitting: false,
+  hasSubmitted: false,
   error: null,
   toast: null,
 };
@@ -45,7 +45,7 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
           ...state,
           scores: newScores,
           selectedCard: card,
-          step: "email",
+          step: "result",
         };
       }
 
@@ -56,9 +56,6 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
       };
     }
 
-    case "GO_TO_EMAIL":
-      return { ...state, step: "email" };
-
     case "SET_SUBMITTING":
       return { ...state, isSubmitting: action.value, error: null };
 
@@ -66,7 +63,7 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
       return { ...state, error: action.error, isSubmitting: false };
 
     case "SUBMIT_SUCCESS":
-      return { ...state, step: "result", isSubmitting: false, error: null };
+      return { ...state, hasSubmitted: true, isSubmitting: false, error: null };
 
     case "SHOW_TOAST":
       return {
