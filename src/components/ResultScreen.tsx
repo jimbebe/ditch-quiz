@@ -81,7 +81,7 @@ export default function ResultScreen({
             Tente de gagner le jeu !
           </p>
           <p className="text-sm text-white/60">
-            Laisse tes coordonnées pour participer au tirage au sort.
+            Laisse tes coordonnées pour participer au tirage au sort le 2 mars.
           </p>
 
           <input
@@ -137,6 +137,26 @@ export default function ResultScreen({
           </button>
         </form>
       )}
+
+      {/* Partage Instagram */}
+      <div className="flex w-full max-w-sm flex-col items-center gap-3 rounded-2xl border-2 border-white/10 bg-white/5 p-6">
+        <p className="font-display text-lg font-bold text-ditch-yellow">
+          Double tes chances !
+        </p>
+        <p className="text-sm text-white/60">
+          Fais un screenshot de ta carte, partage-la en story Instagram et
+          tague{" "}
+          <span className="font-bold text-white">@ditchlejeu</span>
+        </p>
+        <a
+          href="https://www.instagram.com/ditchlejeu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-6 py-3 font-display font-bold text-white transition-all hover:brightness-110 active:scale-[0.98]"
+        >
+          📸 Je partage en story
+        </a>
+      </div>
 
       {/* CTAs */}
       <div className="flex w-full max-w-sm flex-col gap-3">
