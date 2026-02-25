@@ -52,6 +52,34 @@ export default function ResultScreen({ card, onReset }: ResultScreenProps) {
         </p>
       </div>
 
+      {/* CTAs */}
+      <div className="flex w-full max-w-sm flex-col gap-3">
+        <a
+          href="https://deliresgames.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl bg-ditch-yellow px-6 py-3 font-display font-bold text-ditch-dark transition-all hover:brightness-110 active:scale-[0.98]"
+        >
+          🛒 Acheter le jeu
+        </a>
+        <a
+          href="https://www.myludo.fr/#!/game/ditch-95212"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl border-2 border-ditch-teal bg-ditch-teal/10 px-6 py-3 font-display font-bold text-ditch-teal transition-all hover:bg-ditch-teal/20 active:scale-[0.98]"
+        >
+          🎲 Découvrir sur MyLudo
+        </a>
+        <a
+          href="https://www.instagram.com/ditchlejeu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:border-pink-500 hover:bg-pink-500/10 hover:text-pink-400 active:scale-[0.98]"
+        >
+          📸 Suivre sur Instagram
+        </a>
+      </div>
+
       {/* Rejouer */}
       <button
         onClick={onReset}
