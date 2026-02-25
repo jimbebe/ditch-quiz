@@ -69,14 +69,9 @@ export default function ResultScreen({
 
       {/* Formulaire tirage au sort */}
       {hasSubmitted ? (
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-lg font-semibold text-ditch-yellow">
-            Participation enregistrée !
-          </p>
-          <p className="text-sm text-white/60">
-            Viens nous montrer ton résultat sur le stand Délires Games !
-          </p>
-        </div>
+        <p className="text-lg font-semibold text-ditch-yellow">
+          Participation enregistrée !
+        </p>
       ) : (
         <form
           onSubmit={handleSubmit}
