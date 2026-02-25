@@ -9,7 +9,6 @@ interface ResultScreenProps {
   error: string | null;
   hasSubmitted: boolean;
   onSubmit: (name: string, email: string) => void;
-  onReset: () => void;
 }
 
 export default function ResultScreen({
@@ -18,14 +17,14 @@ export default function ResultScreen({
   error,
   hasSubmitted,
   onSubmit,
-  onReset,
 }: ResultScreenProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) return;
+    if (!name.trim() || !email.trim() || !consent) return;
     onSubmit(name.trim(), email.trim().toLowerCase());
   }
 
@@ -40,6 +39,9 @@ export default function ResultScreen({
           boxShadow: `0 0 40px ${card.color}33`,
         }}
       >
+        <p className="text-xs font-bold uppercase tracking-wider text-white/50">
+          Ta carte pouvoir Ditch!
+        </p>
         <span className="text-6xl">{card.emoji}</span>
         <h2
           className="font-display text-3xl font-bold"
@@ -63,34 +65,6 @@ export default function ResultScreen({
           </p>
           <p className="mt-1 text-sm font-semibold text-white">{card.power}</p>
         </div>
-      </div>
-
-      {/* CTAs */}
-      <div className="flex w-full max-w-sm flex-col gap-3">
-        <a
-          href="https://deliresgames.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-xl bg-ditch-yellow px-6 py-3 font-display font-bold text-ditch-dark transition-all hover:brightness-110 active:scale-[0.98]"
-        >
-          🛒 Acheter le jeu
-        </a>
-        <a
-          href="https://www.myludo.fr/#!/game/ditch-95212"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-xl border-2 border-ditch-teal bg-ditch-teal/10 px-6 py-3 font-display font-bold text-ditch-teal transition-all hover:bg-ditch-teal/20 active:scale-[0.98]"
-        >
-          🎲 Découvrir sur MyLudo
-        </a>
-        <a
-          href="https://www.instagram.com/ditchlejeu"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:border-pink-500 hover:bg-pink-500/10 hover:text-pink-400 active:scale-[0.98]"
-        >
-          📸 Suivre sur Instagram
-        </a>
       </div>
 
       {/* Formulaire tirage au sort */}
@@ -133,13 +107,35 @@ export default function ResultScreen({
             className="rounded-xl border-2 border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 outline-none transition-colors focus:border-ditch-teal"
           />
 
+          <label className="flex items-start gap-3 text-left">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-1 h-4 w-4 shrink-0 accent-ditch-yellow"
+            />
+            <span className="text-xs text-white/60">
+              J&apos;accepte que mes données (prénom, email) soient utilisées
+              par Délires Games pour le tirage au sort et recevoir des
+              informations sur les jeux Délires Games. Je peux me désinscrire à
+              tout moment en écrivant à{" "}
+              <a
+                href="mailto:thibaud@deliresgames.com"
+                className="text-ditch-teal underline"
+              >
+                thibaud@deliresgames.com
+              </a>
+              .
+            </span>
+          </label>
+
           {error && (
             <p className="text-center text-sm text-red-400">{error}</p>
           )}
 
           <button
             type="submit"
-            disabled={isSubmitting || !name.trim() || !email.trim()}
+            disabled={isSubmitting || !name.trim() || !email.trim() || !consent}
             className="rounded-xl bg-ditch-yellow px-6 py-3 font-display text-lg font-bold text-ditch-dark transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-50"
           >
             {isSubmitting ? "Envoi en cours…" : "Je participe !"}
@@ -147,13 +143,33 @@ export default function ResultScreen({
         </form>
       )}
 
-      {/* Rejouer */}
-      <button
-        onClick={onReset}
-        className="rounded-xl border-2 border-white/20 bg-white/5 px-8 py-3 font-display font-bold text-white transition-all hover:border-ditch-teal hover:bg-white/10 active:scale-[0.98]"
-      >
-        Rejouer
-      </button>
+      {/* CTAs */}
+      <div className="flex w-full max-w-sm flex-col gap-3">
+        <a
+          href="https://deliresgames.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:border-white/40 hover:bg-white/10 active:scale-[0.98]"
+        >
+          🛒 J'achète le jeu
+        </a>
+        <a
+          href="https://www.myludo.fr/#!/game/ditch-95212"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:border-white/40 hover:bg-white/10 active:scale-[0.98]"
+        >
+          🎲 Je note mes scores sur MyLudo
+        </a>
+        <a
+          href="https://www.instagram.com/ditchlejeu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:border-white/40 hover:bg-white/10 active:scale-[0.98]"
+        >
+          📸 Je suis Ditch! sur Instagram
+        </a>
+      </div>
     </div>
   );
 }

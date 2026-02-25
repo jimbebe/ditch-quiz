@@ -32,7 +32,6 @@ export default function Home() {
             error={state.error}
             hasSubmitted={state.hasSubmitted}
             onSubmit={submitEntry}
-            onReset={reset}
           />
         )}
       </main>
