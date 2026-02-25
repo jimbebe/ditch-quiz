@@ -6,9 +6,9 @@ interface AdminLoginProps {
   onLogin: (password: string) => void;
 }
 
-export default function AdminLogin({ onLogin }: AdminLoginProps) {
+export default function AdminLogin({ onLogin, directAccess = false }: AdminLoginProps & { directAccess?: boolean }) {
   const [clicks, setClicks] = useState(0);
-  const [showInput, setShowInput] = useState(false);
+  const [showInput, setShowInput] = useState(directAccess);
   const [password, setPassword] = useState("");
 
   const handleTitleClick = useCallback(() => {
