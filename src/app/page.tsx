@@ -3,7 +3,6 @@
 import Header from "@/components/Header";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import QuizScreen from "@/components/QuizScreen";
-import EmailScreen from "@/components/EmailScreen";
 import ResultScreen from "@/components/ResultScreen";
 import Toast from "@/components/Toast";
 import { useQuiz } from "@/hooks/useQuiz";
@@ -26,17 +25,14 @@ export default function Home() {
           />
         )}
 
-        {state.step === "email" && state.selectedCard && (
-          <EmailScreen
+        {state.step === "result" && state.selectedCard && (
+          <ResultScreen
             card={state.selectedCard}
             isSubmitting={state.isSubmitting}
             error={state.error}
+            hasSubmitted={state.hasSubmitted}
             onSubmit={submitEntry}
           />
-        )}
-
-        {state.step === "result" && state.selectedCard && (
-          <ResultScreen card={state.selectedCard} onReset={reset} />
         )}
       </main>
 

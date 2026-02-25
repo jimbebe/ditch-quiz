@@ -33,7 +33,7 @@ export interface Stats {
   byCard: { card_key: string; card_name: string; count: number }[];
 }
 
-export type QuizStep = 'welcome' | 'quiz' | 'email' | 'result';
+export type QuizStep = 'welcome' | 'quiz' | 'result';
 
 export interface QuizState {
   step: QuizStep;
@@ -43,6 +43,7 @@ export interface QuizState {
   playerName: string;
   playerEmail: string;
   isSubmitting: boolean;
+  hasSubmitted: boolean;
   error: string | null;
   toast: { message: string; type: 'success' | 'error' } | null;
 }

@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "Ditch! — Quel pouvoir es-tu ?",
   description:
     "Découvre ta carte pouvoir Ditch! au Salon du Jeu de Cannes 2026 et tente de gagner un exemplaire du jeu !",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
