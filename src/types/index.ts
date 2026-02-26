@@ -2,6 +2,7 @@ export interface PowerCard {
   key: string;
   name: string;
   emoji: string;
+  image: string;
   description: string;
   power: string;
   color: string;

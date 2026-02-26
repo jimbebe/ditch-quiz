@@ -5,45 +5,49 @@ export const POWER_CARDS: PowerCard[] = [
     key: "yokai",
     name: "Yokai",
     emoji: "👻",
+    image: "/pictos/yokai.png",
     description:
       "Esprit farceur et imprévisible, le chaos est ton terrain de jeu ! Personne ne sait jamais ce que tu prépares.",
     power:
       "Intervertissez les places de deux joueurs : vous-même et un adversaire, ou deux adversaires entre eux.",
-    color: "#8B5CF6",
-    bgColor: "#1E1040",
+    color: "#3B0C11",
+    bgColor: "#FFDD00",
   },
   {
     key: "okami",
     name: "Okami",
     emoji: "🐺",
+    image: "/pictos/okami.png",
     description:
       "Loup rusé et manipulateur, tu tires les ficelles dans l'ombre. Personne ne sait ce que tu manigances… sauf toi.",
     power:
       "Échangez une carte entre deux joueurs, à l'aveugle.",
-    color: "#3B82F6",
-    bgColor: "#0F1A3D",
+    color: "#3B0C11",
+    bgColor: "#FFDD00",
   },
   {
     key: "geisha",
     name: "Geisha",
-    emoji: "🎭",
+    emoji: "🎎",
+    image: "/pictos/geisha.png",
     description:
       "Stratège subtile et redoutable, tu avances tes pions avec grâce. Tes adversaires ne te voient jamais venir.",
     power:
       "Échangez une carte de votre jeu avec celle d'un adversaire, à l'aveugle.",
-    color: "#EC4899",
-    bgColor: "#3D0F2A",
+    color: "#3B0C11",
+    bgColor: "#FFDD00",
   },
   {
     key: "samourai_noir",
     name: "Samouraï Noir",
-    emoji: "⚔️",
+    emoji: "🗡️",
+    image: "/pictos/samourai_noir.png",
     description:
       "Guerrier calculateur, tu frappes en connaissance de cause. Chaque mouvement est pesé, chaque action est décisive.",
     power:
       "Regardez la carte d'un adversaire et échangez-la avec une des vôtres, à l'aveugle, si vous le souhaitez.",
-    color: "#6B7280",
-    bgColor: "#1A1A2E",
+    color: "#3B0C11",
+    bgColor: "#FFDD00",
   },
 ];
 
@@ -123,7 +127,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
         scores: { samourai_noir: 3, okami: 1 },
       },
       {
-        text: "Cersei Lannister — le pouvoir par l'influence 👑",
+        text: "Tyrion Lannister — le pouvoir par l'influence 👑",
         scores: { geisha: 3, okami: 1 },
       },
       {

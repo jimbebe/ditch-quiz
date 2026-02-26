@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-lg flex-col items-center">
-      <Header />
+      {state.step !== "welcome" && <Header onReset={reset} />}
 
       <main className="flex w-full flex-1 flex-col items-center justify-center">
         {state.step === "welcome" && <WelcomeScreen onStart={startQuiz} />}
@@ -32,6 +32,7 @@ export default function Home() {
             error={state.error}
             hasSubmitted={state.hasSubmitted}
             onSubmit={submitEntry}
+            onReset={reset}
           />
         )}
       </main>

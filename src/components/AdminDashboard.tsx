@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { Entry, Stats } from "@/types";
 import { POWER_CARDS } from "@/lib/quiz-data";
 
@@ -104,7 +105,7 @@ export default function AdminDashboard({
   if (loading) {
     return (
       <div className="flex min-h-dvh items-center justify-center">
-        <p className="text-white/60">Chargement…</p>
+        <p className="font-accent text-lg text-ditch-marron/50">Chargement…</p>
       </div>
     );
   }
@@ -112,10 +113,10 @@ export default function AdminDashboard({
   if (error === "Mot de passe incorrect") {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center gap-4">
-        <p className="text-red-400">{error}</p>
+        <p className="text-red-600">{error}</p>
         <button
           onClick={onLogout}
-          className="text-sm text-white/40 underline"
+          className="font-accent text-base text-ditch-marron/40 underline"
         >
           Réessayer
         </button>
@@ -132,12 +133,19 @@ export default function AdminDashboard({
     <div className="mx-auto max-w-4xl px-4 py-6">
       {/* Header */}
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="font-display text-2xl font-bold text-ditch-yellow">
-          Admin Ditch!
-        </h1>
+        <div className="flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="Ditch!"
+            width={120}
+            height={48}
+            className="h-auto w-24"
+          />
+          <span className="font-accent text-lg text-ditch-crimson">Admin</span>
+        </div>
         <button
           onClick={onLogout}
-          className="text-sm text-white/40 hover:text-white/60"
+          className="text-sm text-ditch-marron/40 hover:text-ditch-marron/60"
         >
           Déconnexion
         </button>
@@ -145,8 +153,8 @@ export default function AdminDashboard({
 
       {/* Stats */}
       {stats && (
-        <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-6">
-          <h2 className="mb-4 font-display text-lg font-bold text-white">
+        <div className="mb-8 rounded-2xl border-2 border-ditch-marron/15 bg-white/50 p-6">
+          <h2 className="mb-4 font-display text-lg font-bold text-ditch-marron">
             Statistiques — {stats.total} participant{stats.total > 1 ? "s" : ""}
           </h2>
           <div className="flex flex-col gap-3">
@@ -154,19 +162,19 @@ export default function AdminDashboard({
               const pct = stats.total > 0 ? (item.count / stats.total) * 100 : 0;
               return (
                 <div key={item.card_key} className="flex items-center gap-3">
-                  <span className="w-32 text-sm font-semibold text-white/80">
+                  <span className="w-32 text-sm font-semibold text-ditch-marron/70">
                     {item.card_name}
                   </span>
-                  <div className="h-6 flex-1 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-6 flex-1 overflow-hidden rounded-full bg-ditch-marron/10">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{
                         width: `${pct}%`,
-                        backgroundColor: cardColors[item.card_key] || "#FFD100",
+                        backgroundColor: cardColors[item.card_key] || "#3B0C11",
                       }}
                     />
                   </div>
-                  <span className="w-16 text-right text-sm text-white/60">
+                  <span className="w-16 text-right text-sm text-ditch-marron/50">
                     {item.count} ({Math.round(pct)}%)
                   </span>
                 </div>
@@ -181,26 +189,26 @@ export default function AdminDashboard({
         <button
           onClick={handleDraw}
           disabled={actionLoading}
-          className="rounded-xl bg-ditch-teal px-6 py-3 font-display font-bold text-white transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-50"
+          className="rounded-xl bg-ditch-marron px-6 py-3 font-display font-bold text-ditch-yellow transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-50"
         >
           Tirage au sort
         </button>
         <button
           onClick={handleExport}
-          className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:bg-white/10 active:scale-[0.98]"
+          className="rounded-xl border-2 border-ditch-marron/20 bg-white/50 px-6 py-3 font-display font-bold text-ditch-marron transition-all hover:bg-white/70 active:scale-[0.98]"
         >
           Exporter CSV
         </button>
         <button
           onClick={fetchData}
-          className="rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-display font-bold text-white transition-all hover:bg-white/10 active:scale-[0.98]"
+          className="rounded-xl border-2 border-ditch-marron/20 bg-white/50 px-6 py-3 font-display font-bold text-ditch-marron transition-all hover:bg-white/70 active:scale-[0.98]"
         >
           Rafraîchir
         </button>
         <button
           onClick={handleClear}
           disabled={actionLoading}
-          className="rounded-xl border border-red-500/30 bg-red-500/10 px-6 py-3 font-display font-bold text-red-400 transition-all hover:bg-red-500/20 active:scale-[0.98] disabled:opacity-50"
+          className="rounded-xl border-2 border-red-600/30 bg-red-600/10 px-6 py-3 font-display font-bold text-red-700 transition-all hover:bg-red-600/20 active:scale-[0.98] disabled:opacity-50"
         >
           Tout supprimer
         </button>
@@ -208,53 +216,53 @@ export default function AdminDashboard({
 
       {/* Winner */}
       {winner && (
-        <div className="mb-8 animate-scale-in rounded-2xl border-2 border-ditch-yellow bg-ditch-yellow/10 p-6 text-center">
-          <p className="mb-2 text-sm text-white/60">Gagnant du tirage :</p>
-          <p className="font-display text-2xl font-bold text-ditch-yellow">
+        <div className="mb-8 animate-scale-in rounded-2xl border-2 border-ditch-marron bg-ditch-marron/10 p-6 text-center">
+          <p className="mb-2 font-accent text-base text-ditch-marron/60">Gagnant du tirage :</p>
+          <p className="font-display text-2xl font-bold text-ditch-marron">
             {winner.name}
           </p>
-          <p className="text-white/80">{winner.email}</p>
-          <p className="mt-1 text-sm text-white/60">
+          <p className="text-ditch-marron/70">{winner.email}</p>
+          <p className="mt-1 font-accent text-base text-ditch-marron/60">
             Carte : {winner.card_name}
           </p>
         </div>
       )}
 
       {error && error !== "Mot de passe incorrect" && (
-        <p className="mb-4 text-center text-red-400">{error}</p>
+        <p className="mb-4 text-center text-red-600">{error}</p>
       )}
 
       {/* Tableau des participants */}
-      <div className="overflow-x-auto rounded-2xl border border-white/10">
+      <div className="overflow-x-auto rounded-2xl border-2 border-ditch-marron/15">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-white/10 bg-white/5">
-              <th className="px-4 py-3 font-semibold text-white/60">Nom</th>
-              <th className="px-4 py-3 font-semibold text-white/60">Email</th>
-              <th className="px-4 py-3 font-semibold text-white/60">Carte</th>
-              <th className="px-4 py-3 font-semibold text-white/60">Date</th>
+            <tr className="border-b border-ditch-marron/15 bg-white/50">
+              <th className="px-4 py-3 font-semibold text-ditch-marron/60">Nom</th>
+              <th className="px-4 py-3 font-semibold text-ditch-marron/60">Email</th>
+              <th className="px-4 py-3 font-semibold text-ditch-marron/60">Carte</th>
+              <th className="px-4 py-3 font-semibold text-ditch-marron/60">Date</th>
             </tr>
           </thead>
           <tbody>
             {entries.map((entry) => (
               <tr
                 key={entry.id}
-                className="border-b border-white/5 hover:bg-white/5"
+                className="border-b border-ditch-marron/5 hover:bg-white/40"
               >
-                <td className="px-4 py-3 text-white">{entry.name}</td>
-                <td className="px-4 py-3 text-white/80">{entry.email}</td>
+                <td className="px-4 py-3 text-ditch-marron">{entry.name}</td>
+                <td className="px-4 py-3 text-ditch-marron/70">{entry.email}</td>
                 <td className="px-4 py-3">
                   <span
                     className="rounded-full px-3 py-1 text-xs font-semibold"
                     style={{
-                      backgroundColor: `${cardColors[entry.card_key] || "#FFD100"}22`,
-                      color: cardColors[entry.card_key] || "#FFD100",
+                      backgroundColor: `${cardColors[entry.card_key] || "#3B0C11"}22`,
+                      color: cardColors[entry.card_key] || "#3B0C11",
                     }}
                   >
                     {entry.card_name}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-white/60">
+                <td className="px-4 py-3 text-ditch-marron/50">
                   {new Date(entry.created_at).toLocaleDateString("fr-FR", {
                     day: "2-digit",
                     month: "2-digit",
@@ -266,7 +274,7 @@ export default function AdminDashboard({
             ))}
             {entries.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-white/40">
+                <td colSpan={4} className="px-4 py-8 text-center font-accent text-base text-ditch-marron/40">
                   Aucun participant pour le moment
                 </td>
               </tr>

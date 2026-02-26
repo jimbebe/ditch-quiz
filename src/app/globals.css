@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --ditch-yellow: #FFD100;
+  --ditch-yellow: #FFDD00;
   --ditch-teal: #2A8A8A;
   --ditch-bordeaux: #7A1A1A;
+  --ditch-marron: #3B0C11;
+  --ditch-crimson: #8B1A1A;
   --ditch-dark: #1A1A2E;
   --ditch-light: #FFF8E7;
 }
@@ -12,15 +14,18 @@
   --color-ditch-yellow: var(--ditch-yellow);
   --color-ditch-teal: var(--ditch-teal);
   --color-ditch-bordeaux: var(--ditch-bordeaux);
+  --color-ditch-marron: var(--ditch-marron);
+  --color-ditch-crimson: var(--ditch-crimson);
   --color-ditch-dark: var(--ditch-dark);
   --color-ditch-light: var(--ditch-light);
   --font-display: var(--font-fredoka);
   --font-body: var(--font-nunito);
+  --font-accent: var(--font-caveat);
 }
 
 body {
-  background: var(--ditch-dark);
-  color: #fff;
+  background: var(--ditch-yellow);
+  color: var(--ditch-marron);
   font-family: var(--font-body), sans-serif;
   min-height: 100dvh;
 }
@@ -61,10 +66,10 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 209, 0, 0.3);
+    box-shadow: 0 0 20px rgba(59, 12, 17, 0.2);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 209, 0, 0.6);
+    box-shadow: 0 0 40px rgba(59, 12, 17, 0.4);
   }
 }
 
@@ -97,6 +102,33 @@ body {
 
 .animate-toast-in {
   animation: toast-in 0.3s ease-out forwards;
+}
+
+/* Animation cartes en éventail */
+@keyframes cardFan {
+  from {
+    opacity: 0;
+    transform: rotate(0deg) translateX(0);
+  }
+  to {
+    opacity: 1;
+    transform: var(--card-fan-transform);
+  }
+}
+
+@keyframes cardFloat {
+  0%, 100% {
+    transform: var(--card-fan-transform) translateY(0);
+  }
+  50% {
+    transform: var(--card-fan-transform) translateY(-4px);
+  }
+}
+
+.animate-card-fan {
+  opacity: 0;
+  animation: cardFan 0.6s ease-out forwards, cardFloat 3s ease-in-out infinite;
+  animation-delay: var(--card-delay), calc(var(--card-delay) + 0.6s);
 }
 
 /* Stagger animation pour les réponses */

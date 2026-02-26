@@ -19,8 +19,8 @@ export default function Toast({ message, type, onClose }: ToastProps) {
       <div
         className={`animate-toast-in rounded-xl px-6 py-3 font-semibold shadow-lg ${
           type === "success"
-            ? "bg-emerald-500 text-white"
-            : "bg-red-500 text-white"
+            ? "bg-ditch-marron text-ditch-yellow"
+            : "bg-red-600 text-white"
         }`}
       >
         {message}
