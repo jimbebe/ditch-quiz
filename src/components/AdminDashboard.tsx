@@ -75,26 +75,6 @@ export default function AdminDashboard({
     }
   }
 
-  async function handleClear() {
-    if (!confirm("Supprimer TOUTES les participations ? Cette action est irréversible.")) {
-      return;
-    }
-    setActionLoading(true);
-    try {
-      await fetch("/api/entries/clear", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
-      await fetchData();
-      setWinner(null);
-    } catch {
-      setError("Erreur réseau");
-    } finally {
-      setActionLoading(false);
-    }
-  }
-
   function handleExport() {
     window.open(
       `/api/entries/export?password=${encodeURIComponent(password)}`,
@@ -204,13 +184,6 @@ export default function AdminDashboard({
           className="rounded-xl border-2 border-ditch-marron/20 bg-white/50 px-6 py-3 font-display font-bold text-ditch-marron transition-all hover:bg-white/70 active:scale-[0.98]"
         >
           Rafraîchir
-        </button>
-        <button
-          onClick={handleClear}
-          disabled={actionLoading}
-          className="rounded-xl border-2 border-red-600/30 bg-red-600/10 px-6 py-3 font-display font-bold text-red-700 transition-all hover:bg-red-600/20 active:scale-[0.98] disabled:opacity-50"
-        >
-          Tout supprimer
         </button>
       </div>
 
